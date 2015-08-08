@@ -32,6 +32,8 @@ var letterbox = (function($){
 
         lettersArray[selectedLetterID].activated = true;
         $selectedLetter.addClass('selected').removeClass('choice');
+
+        $(document).trigger('letterSelected', $selectedLetter.html());
       },
       render = function(){
         var template =  Handlebars.compile(lettersTemplate),

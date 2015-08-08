@@ -34,23 +34,42 @@ h2{
 
 ul{
   list-style: none;
+  display: inline-block;
+}
+
+.quotebox li{
+  font-size: 25px;
+  color: #555;
+  width: 45px;
+  height: 45px;
+  line-height: 45px;
+  margin: 2px;
+  background-color: #fff;
+  border-bottom: 2px solid #007CFF;
+  display: inline-block;
+}
+
+.letterbox li{
+  font-size: 25px;
+  border: 1px solid #007CFF;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  margin: 2px;
+  background-color: #fff;
   float: left;
-  margin-right: 30px;
+}
+
+.quotebox .content .word{
+  margin: 6px 30px 6px 30px;
 }
 
 li{
   position: relative;
-  width: 50px;
-  height: 50px;
-  float: left;
-  line-height: 50px;
-  font-size: 30px;
   font-weight: normal;
   text-align: center;
-  margin: 2px;
   z-index: 2;
   transition: all 0.5s;
-  border: 1px solid #007CFF;
 }
 
 li.choice:hover{
@@ -69,4 +88,19 @@ li.selected{
   background-color: #007CFF;
   color: #fff;
   font-weight: bold;
+}
+
+.quotebox .content{
+  padding: 30px 10px;
+  background-color: #eee;
+  display: block;
+  text-align: center;
+}
+
+.letterbox  {
+  width: 50%;
+}
+
+li.guessed-true{
+  background-color: pink;
 }

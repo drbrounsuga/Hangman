@@ -7,6 +7,8 @@ var quotebox = (function($){
       quoteData,
       quoteObject,
       ajaxCall,
+      correctCount = 0,
+      letterCount = 0,
       mashapeKey = 'o7miaRMGj4msh8Q05jptlzUGFfo8p1UhntbjsnLFEHmBbG60gC',
       mashapeEndPoint = 'https://andruxnet-random-famous-quotes.p.mashape.com/cat=movies',
       cacheDOM = function(){
@@ -70,6 +72,13 @@ var quotebox = (function($){
 
         for(var i = 0, len = letters.length; i < len; i++){
           charStatus = isAlphaChar(letters[i]);
+
+          if(!charStatus){
+            correctCount++;
+          }
+
+          letterCount++;
+
           letterObj = {
             id: i,
             value: letters[i].toUpperCase(),
@@ -85,14 +94,44 @@ var quotebox = (function($){
       isAlphaChar = function(str){
         return str.length === 1 && str.match(/[a-z]/i);
       },
+      update = function(event, value){
+        var currentWord,
+            currentLetter;
+
+        //cycle through words array
+        for(var i = 0, len = quoteObject.words.length; i < len; i++){
+          currentWord = quoteObject.words[i];
+
+          //cycle through letter objects in words array
+          for(var n = 0, len2 = currentWord.length; n < len2; n++){
+            currentLetter = currentWord[n].value;
+
+            if(currentLetter === value){
+              quoteObject.words[i][n].guessed = true;
+              correctCount++;
+            }
+          }
+        }
+
+        render();
+      },
+      hasWon = function(html){
+        if(correctCount === letterCount){
+          return 'Game Over';
+        }else{
+          return html;
+        }
+      },
       render = function(){
         var template =  Handlebars.compile(quoteTemplate),
             html = template(quoteObject);
-        $quote.html(html);
+            html = hasWon(html);
+        $quote.html('').html(html);
       },
       destroy = function(){
         $quote.empyt();
         quoteObject = {};
+        $(document).off('letterSelected', update);
       },
       reset = function(){
         destroy();
@@ -101,6 +140,7 @@ var quotebox = (function($){
       init = function(){
         cacheDOM();
         getNewQuote();
+        $(document).on('letterSelected', update);
       };
 
       init();

@@ -11,25 +11,33 @@
   <div class="container">
 
     <h2>GUESS THE SOURCE</h2>
-    <div id="quote" class="clearfix"></div>
+    <div id="quote" class="quotebox"></div>
     <script id="quoteTemplate" type="text/x-handlebars-template">
       <div class="meta">
         <strong>HINT</strong>: ({{category}} Quote)
         <div class="quote-text">&quot;{{quote}}&quot;</div>
       </div>
-      {{#each words}}
-        <ul class="clearfix">
-          {{#each .}}
-            <li data-id="{{id}}" class="letter special-{{isSpecialChar}}">{{value}}</li>
-          {{/each}}
-        </ul>
-      {{/each}}
+      <div class="content clearfix">
+        {{#each words}}
+          <ul class="clearfix word">
+            {{#each .}}
+              <li data-id="{{id}}" class="letter special-{{isSpecialChar}} guessed-{{guessed}}">
+                {{#if guessed}}
+                  {{value}}
+                {{else}}
+                  &nbsp;
+                {{/if}}
+              </li>
+            {{/each}}
+          </ul>
+        {{/each}}
+      </div>
     </script>
 
     <!-- score, reset, new game -->
 
     <h2>LETTERS</h2>
-    <div id="letters" class="clearfix"></div>
+    <div id="letters" class="clearfix letterbox"></div>
     <script id="lettersTemplate" type="text/x-handlebars-template">
       <ul class="clearfix">
         {{#each .}}
