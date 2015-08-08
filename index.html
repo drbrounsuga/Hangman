@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Game</title>
+</head>
+<body>
+
+  <div id="letters"></div>
+  <script id="lettersTemplate" type="text/x-handlebars-template">
+    <ul>
+      {{#each .}}
+        <li data-id="{{id}}" class="choice">{{value}}</li>
+      {{/each}}
+    </ul>
+  </script>
+
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="js/handlebars-v3.0.3.js"></script>
+  <script src="js/letterbox.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
