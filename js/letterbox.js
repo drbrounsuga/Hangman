@@ -39,8 +39,13 @@ var letterbox = (function($){
         $letters.html(html);
       },
       destroy = function(){
-        $letters.remove();
+        $letters.empty();
+        lettersArray = [];
         $letters.off('click', '.choice', useLetter);
+      },
+      reset = function(){
+        destroy();
+        init();
       },
       init = function(){
         cacheDOM();
@@ -52,7 +57,8 @@ var letterbox = (function($){
       init();
 
       return {
-        destroy: destroy
+        destroy: destroy,
+        reset: reset
       };
 
 })(jQuery);
