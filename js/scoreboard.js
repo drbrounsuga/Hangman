@@ -46,7 +46,7 @@ var scoreboard = (function($){
         streak++;
         render({
           title:'AWESOME!',
-          message: "Congrats! You solved the quote and saved Kenny.<br> Your current winning streak is " + streak + ' game(s)'
+          message: 'Congrats! You solved the quote and saved Kenny.<br>Your current winning streak is ' + streak + ' game(s)'
         });
       },
       hideMessage = function(){
