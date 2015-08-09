@@ -13,13 +13,7 @@ var letterbox = (function($){
         $letters = $document.find('#letters');
         lettersTemplate = $document.find('#lettersTemplate').html();
       },
-      createNewTile = function(index, value){
-        return {
-          id: index,
-          value: value,
-          activated: false
-        };
-      },
+      //cycle through lettersBank and make objects
       prepareTiles = function(){
         var letter;
         for(var i = 0, len = lettersBank.length; i < len; i++){
@@ -27,6 +21,16 @@ var letterbox = (function($){
           lettersArray.push(letter);
         }
       },
+      //function that makes the objects for prepareTiles()
+      createNewTile = function(index, value){
+        return {
+          id: index,
+          value: value,
+          activated: false
+        };
+      },
+      //handles clicks on tiles
+      //**Maybe adjust to let render handle DOM changes?
       useLetter = function(e){
         e.preventDefault();
         var $selectedLetter = $(this),

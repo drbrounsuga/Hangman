@@ -21,6 +21,9 @@ var scoreboard = (function($){
         $document = $(document);
         $hangman = $document.find('.hangman');
         $modal = $document.find('#modal');
+        //on bad guesses we will unhide different layers
+        //of the hangman image. Keep these in an Array to
+        //access easily
         $err0 = $hangman.find('.layer-0');
         $err1 = $hangman.find('.layer-1');
         $err2 = $hangman.find('.layer-2');
@@ -42,11 +45,11 @@ var scoreboard = (function($){
           });
         }
       },
-      congratulate = function(){
+      congratulate = function(event, answer){
         streak++;
         render({
           title:'AWESOME!',
-          message: 'Congrats! You solved the quote and saved Kenny.<br>Your current winning streak is ' + streak + ' game(s)'
+          message: '<strong>Answer:</strong> ' + answer + '<br>Congrats! You solved the quote and saved Kenny. Your current winning streak is <strong>' + streak + '</strong> game(s)'
         });
       },
       hideMessage = function(){
@@ -54,6 +57,8 @@ var scoreboard = (function($){
         $modal.addClass('hidden');
       },
       showLayer = function(index){
+        //shows the layers of the hangman
+        //image as refrenced in the cacheDOM function
         var $el = errArray[index];
         $el.removeClass('hidden');
       },

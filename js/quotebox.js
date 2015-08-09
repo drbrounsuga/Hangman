@@ -10,6 +10,7 @@ var quotebox = (function($){
       ajaxCall,
       correctCount,
       letterCount,
+      //my API key from https://www.mashape.com/andruxnet/random-famous-quotes
       mashapeKey = 'o7miaRMGj4msh8Q05jptlzUGFfo8p1UhntbjsnLFEHmBbG60gC',
       mashapeEndPoint = 'https://andruxnet-random-famous-quotes.p.mashape.com/cat=movies',
       cacheDOM = function(){
@@ -47,6 +48,7 @@ var quotebox = (function($){
 
         quoteObject = {
           words: [],
+          author: author,
           quote: quote,
           category: category,
           solved: false
@@ -73,19 +75,24 @@ var quotebox = (function($){
             charStatus;
 
         for(var i = 0, len = letters.length; i < len; i++){
+          //is it a letter A-Z?
           charStatus = isAlphaChar(letters[i]);
 
+          //if not we will mark it as guessed since the
+          //user will only guess characters A-Z
           if(!charStatus){
             correctCount++;
           }
 
+          //keep track of how many letters in this quote
           letterCount++;
 
           letterObj = {
             id: i,
             value: letters[i].toUpperCase(),
             guessed: !charStatus,
-            isSpecialChar: !charStatus
+            isSpecialChar: !charStatus,
+            selected: false
           };
 
           lettersArray.push(letterObj);
@@ -111,8 +118,11 @@ var quotebox = (function($){
 
             if(currentLetter === value){
               quoteObject.words[i][n].guessed = true;
+              quoteObject.words[i][n].selected = true;
               correctCount++;
               correctThisGuess++;
+            }else{
+              quoteObject.words[i][n].selected = false;
             }
           }
         }
@@ -125,7 +135,7 @@ var quotebox = (function($){
       },
       hasWon = function(html){
         if(correctCount === letterCount && correctCount !== 0){
-          $document.trigger('gamewon');
+          $document.trigger('gamewon', quoteObject.author);
         }
       },
       render = function(){

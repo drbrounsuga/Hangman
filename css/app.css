@@ -1,3 +1,8 @@
+/*
+*=========================
+*GENERIC STYLES
+*=========================
+*/
 *{
   box-sizing: border-box;
   margin: 0;
@@ -7,10 +12,6 @@
 
 html, body{
   color: #666;
-}
-
-#quote{
-  margin-bottom: 70px;
 }
 
 .container{
@@ -45,18 +46,21 @@ ul{
   display: inline-block;
 }
 
-.quotebox li{
-  font-size: 25px;
-  color: #555;
-  width: 45px;
-  height: 45px;
-  line-height: 45px;
-  margin: 2px;
-  background-color: #fff;
-  border-bottom: 2px solid #007CFF;
-  display: inline-block;
+li{
+  position: relative;
+  font-weight: normal;
+  text-align: center;
+  z-index: 2;
+  transition: all 0.5s;
 }
 
+
+
+/*
+*=========================
+*LETTERBOX STYLES
+*=========================
+*/
 .letterbox li{
   font-size: 25px;
   border: 1px solid #007CFF;
@@ -68,16 +72,8 @@ ul{
   float: left;
 }
 
-.quotebox .content .word{
-  margin: 6px 30px 6px 30px;
-}
-
-li{
-  position: relative;
-  font-weight: normal;
-  text-align: center;
-  z-index: 2;
-  transition: all 0.5s;
+.letterbox  {
+  width: 50%;
 }
 
 li.choice:hover{
@@ -98,6 +94,33 @@ li.selected{
   font-weight: bold;
 }
 
+
+
+/*
+*=========================
+*QUOTEBOX STYLES
+*=========================
+*/
+#quote{
+  margin-bottom: 70px;
+}
+
+.quotebox li{
+  font-size: 25px;
+  color: #555;
+  width: 45px;
+  height: 45px;
+  line-height: 45px;
+  margin: 2px;
+  background-color: #fff;
+  border-bottom: 2px solid #007CFF;
+  display: inline-block;
+}
+
+.quotebox .content .word{
+  margin: 6px 30px 6px 30px;
+}
+
 .quotebox .content{
   padding: 30px 10px 40px;
   background-color: #eee;
@@ -106,18 +129,33 @@ li.selected{
   border-bottom: 2px solid #ddd;
 }
 
-.letterbox  {
-  width: 50%;
-}
-
 li.guessed-true{
-  background-color: #C3E7CC;
+  background-color: rgba(195, 231, 204, 1);
 }
 
+li.guessed-true.pop{
+  -webkit-animation: letterPop 0.5s;
+  animation: letterPop 0.3s linear;
+}
+
+
+
+/*
+*=========================
+*FOOTER CREDITS
+*=========================
+*/
 .footer{
   margin-top: 100px;
 }
 
+
+
+/*
+*=========================
+*HANGMAN STATUS
+*=========================
+*/
 .hangman{
   position: relative;
   top: -45px;
@@ -172,6 +210,13 @@ li.guessed-true{
   background-image: url(../img/hangmancrop-6.png);
 }
 
+
+
+/*
+*=========================
+*POP UP/MODAL
+*=========================
+*/
 #modal{
   position: fixed;
   top: 0;
@@ -218,4 +263,30 @@ li.guessed-true{
 
 .messagebody{
   margin: 0 0 50px;
+}
+
+
+
+/*
+*=========================
+*ANIMATION
+*=========================
+*/
+@keyframes letterPop{
+
+  0% {
+    background-color: rgba(195, 231, 204, 0);
+    transform: scale(0.8);
+  }
+
+  95% {
+    background-color: rgba(195, 231, 204, 1);
+    transform: scale(1.1);
+  }
+
+  100% {
+    background-color: rgba(195, 231, 204, 1);
+    transform: scale(1);
+  }
+
 }
