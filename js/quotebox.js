@@ -8,8 +8,8 @@ var quotebox = (function($){
       quoteData,
       quoteObject,
       ajaxCall,
-      correctCount = 0,
-      letterCount = 0,
+      correctCount,
+      letterCount,
       mashapeKey = 'o7miaRMGj4msh8Q05jptlzUGFfo8p1UhntbjsnLFEHmBbG60gC',
       mashapeEndPoint = 'https://andruxnet-random-famous-quotes.p.mashape.com/cat=movies',
       cacheDOM = function(){
@@ -124,15 +124,16 @@ var quotebox = (function($){
         render();
       },
       hasWon = function(html){
-        if(correctCount === letterCount){
+        if(correctCount === letterCount && correctCount !== 0){
           $document.trigger('gamewon');
         }
       },
       render = function(){
         var template =  Handlebars.compile(quoteTemplate),
             html = template(quoteObject);
-            hasWon();
+
         $quote.html('').html(html);
+        hasWon();
       },
       destroy = function(){
         $quote.empty();
@@ -145,6 +146,8 @@ var quotebox = (function($){
         init();
       },
       init = function(){
+        correctCount = 0;
+        letterCount = 0;
         cacheDOM();
         getNewQuote();
         $document.on('letterSelected', update);

@@ -120,7 +120,7 @@ li.guessed-true{
   left: 0;
   width: 200px;
   height: 237px;
-  background-color: powderblue;
+  background-color: #fff;
   float: right;
 }
 
@@ -136,7 +136,7 @@ li.guessed-true{
   display: inline-block;
 }
 
-.layer-1.hidden, .layer-2.hidden, .layer-3.hidden, .layer-4.hidden, .layer-5.hidden, .layer-6.hidden{
+.layer-0.hidden, .layer-1.hidden, .layer-2.hidden, .layer-3.hidden, .layer-4.hidden, .layer-5.hidden, .layer-6.hidden{
   display: none;
 }
 
