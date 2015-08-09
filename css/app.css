@@ -26,6 +26,10 @@ h2{
   display: inline-block;
 }
 
+.highlight{
+  color: #FFAA19;
+}
+
 .meta{
   margin-bottom: 20px;
 }
@@ -117,7 +121,7 @@ li.guessed-true{
 .hangman{
   position: relative;
   top: -45px;
-  left: 0;
+  left: -60px;
   width: 200px;
   height: 237px;
   background-color: #fff;
@@ -166,4 +170,52 @@ li.guessed-true{
 
 .layer-6{
   background-image: url(../img/hangmancrop-6.png);
+}
+
+#modal{
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.85);
+}
+
+#modal.hidden{
+  display: none;
+}
+
+#modal h2{
+  color: #163E8C;
+  font-weight: normal;;
+}
+
+#modal button{
+  background-color: #123273;
+  border: none;
+  padding: 10px 40px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 20px;
+  float: right;
+  transition: all 0.4s;
+}
+
+#modal button:hover{
+  background-color: #163E8C;
+  cursor: pointer;
+}
+
+.message{
+  background-color: #eee;
+  width: 50%;
+  height: auto;
+  padding: 30px;
+  margin: 200px auto;
+  color: #555;
+}
+
+.messagebody{
+  margin: 0 0 50px;
 }

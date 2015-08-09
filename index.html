@@ -10,7 +10,7 @@
 
   <div class="container">
 
-    <h2>GUESS THE SOURCE</h2>
+    <h2><span class="highlight">HANGMAN:</span> GUESS THE SOURCE*</h2>
     <div id="quote" class="quotebox"></div>
     <script id="quoteTemplate" type="text/x-handlebars-template">
       <div class="meta">
@@ -58,9 +58,22 @@
     </script>
 
     <div class="footer">
-      Image courtesy of http://theinterrobang.com/the-winners-list/
+      <p>Image courtesy of http://theinterrobang.com/the-winners-list/</p>
+      <p><strong>Author:</strong> LaVaughn Haynes &ndash; http://www.bonvon.com</p>
+      <p>* This project was done in javaScript using modular pattern and consuming random quotes API</p>
     </div>
   </div>
+
+  <div id="modal" class="hidden"></div>
+  <script id="modalTemplate" type="text/x-handlebars-template">
+    <div class="message clearfix">
+      <h2>{{title}}</h2>
+      <div class="messagebody">
+        {{message}}
+      </div>
+      <button class="confirm">OK</button>
+    </div>
+  </script>
 
   <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
   <script src="js/handlebars-v3.0.3.js"></script>

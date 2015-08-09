@@ -4,6 +4,8 @@ var scoreboard = (function($){
 
   var $document,
       $hangman,
+      $modal,
+      modalTemplate,
       $err0,
       $err1,
       $err2,
@@ -18,6 +20,7 @@ var scoreboard = (function($){
       cacheDOM = function(){
         $document = $(document);
         $hangman = $document.find('.hangman');
+        $modal = $document.find('#modal');
         $err0 = $hangman.find('.layer-0');
         $err1 = $hangman.find('.layer-1');
         $err2 = $hangman.find('.layer-2');
@@ -26,20 +29,29 @@ var scoreboard = (function($){
         $err5 = $hangman.find('.layer-5');
         $err6 = $hangman.find('.layer-6');
         errArray = [$err0, $err1, $err2, $err3, $err4, $err5, $err6];
+        modalTemplate = $document.find('#modalTemplate').html();
       },
       update = function(){
         showLayer(currentWrongCount);
         currentWrongCount++;
         if(currentWrongCount === maxWrong){
           streak = 0;
-          alert('GAME OVER');
-          $document.trigger('reset');
+          render({
+            title:'TRY AGAIN',
+            message: 'Game over, man! Game over! You killed Kenny.'
+          });
         }
       },
       congratulate = function(){
         streak++;
-        alert('YOU WIN! (streak: '+ streak + ')');
+        render({
+          title:'AWESOME!',
+          message: "Congrats! You solved the quote and saved Kenny.<br> Your current winning streak is " + streak + ' game(s)'
+        });
+      },
+      hideMessage = function(){
         $document.trigger('reset');
+        $modal.addClass('hidden');
       },
       showLayer = function(index){
         var $el = errArray[index];
@@ -56,10 +68,16 @@ var scoreboard = (function($){
         $document.off('badguess', update);
         $document.off('gamewon', congratulate);
         $document.off('reset', reset);
+        $document.off('click', '.confirm', hideMessage);
       },
       reset = function(){
         destroy();
         init();
+      },
+      render = function(message){
+        var template =  Handlebars.compile(modalTemplate),
+            html = template(message);
+        $modal.html(html).removeClass('hidden');
       },
       init = function(){
         cacheDOM();
@@ -67,8 +85,10 @@ var scoreboard = (function($){
         $document.on('badguess', update);
         $document.on('gamewon', congratulate);
         $document.on('reset', reset);
+        $document.on('click', '.confirm', hideMessage);
       };
 
       init();
+
 
 })(jQuery);
