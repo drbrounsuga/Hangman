@@ -3,6 +3,7 @@ var quotebox = (function($){
   "use strict";
 
   var $quote,
+      $document,
       quoteTemplate,
       quoteData,
       quoteObject,
@@ -12,8 +13,9 @@ var quotebox = (function($){
       mashapeKey = 'o7miaRMGj4msh8Q05jptlzUGFfo8p1UhntbjsnLFEHmBbG60gC',
       mashapeEndPoint = 'https://andruxnet-random-famous-quotes.p.mashape.com/cat=movies',
       cacheDOM = function(){
-        $quote = $('#quote');
-        quoteTemplate = $('#quoteTemplate').html();
+        $document = $(document);
+        $quote = $document.find('#quote');
+        quoteTemplate = $document.find('#quoteTemplate').html();
       },
       getNewQuote = function(){
         ajaxCall = $.ajax({
@@ -96,7 +98,8 @@ var quotebox = (function($){
       },
       update = function(event, value){
         var currentWord,
-            currentLetter;
+            currentLetter,
+            correctThisGuess = 0;
 
         //cycle through words array
         for(var i = 0, len = quoteObject.words.length; i < len; i++){
@@ -109,29 +112,33 @@ var quotebox = (function($){
             if(currentLetter === value){
               quoteObject.words[i][n].guessed = true;
               correctCount++;
+              correctThisGuess++;
             }
           }
+        }
+
+        if(correctThisGuess === 0){
+          $document.trigger('badguess');
         }
 
         render();
       },
       hasWon = function(html){
         if(correctCount === letterCount){
-          return 'Game Over';
-        }else{
-          return html;
+          $document.trigger('gamewon');
         }
       },
       render = function(){
         var template =  Handlebars.compile(quoteTemplate),
             html = template(quoteObject);
-            html = hasWon(html);
+            hasWon();
         $quote.html('').html(html);
       },
       destroy = function(){
-        $quote.empyt();
+        $quote.empty();
         quoteObject = {};
-        $(document).off('letterSelected', update);
+        $document.off('letterSelected', update);
+        $document.off('reset', reset);
       },
       reset = function(){
         destroy();
@@ -140,7 +147,8 @@ var quotebox = (function($){
       init = function(){
         cacheDOM();
         getNewQuote();
-        $(document).on('letterSelected', update);
+        $document.on('letterSelected', update);
+        $document.on('reset', reset);
       };
 
       init();

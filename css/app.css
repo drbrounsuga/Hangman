@@ -15,11 +15,15 @@ html, body{
 
 .container{
   padding: 20px;
+  min-width: 700px;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 h2{
   margin: 10px 0;
   clear: both;
+  display: inline-block;
 }
 
 .meta{
@@ -91,10 +95,11 @@ li.selected{
 }
 
 .quotebox .content{
-  padding: 30px 10px;
+  padding: 30px 10px 40px;
   background-color: #eee;
   display: block;
   text-align: center;
+  border-bottom: 2px solid #ddd;
 }
 
 .letterbox  {
@@ -102,5 +107,63 @@ li.selected{
 }
 
 li.guessed-true{
-  background-color: pink;
+  background-color: #C3E7CC;
+}
+
+.footer{
+  margin-top: 100px;
+}
+
+.hangman{
+  position: relative;
+  top: -45px;
+  left: 0;
+  width: 200px;
+  height: 237px;
+  background-color: powderblue;
+  float: right;
+}
+
+.hangman div{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200px;
+  height: 237px;
+}
+
+.hangman .strike{
+  display: inline-block;
+}
+
+.layer-1.hidden, .layer-2.hidden, .layer-3.hidden, .layer-4.hidden, .layer-5.hidden, .layer-6.hidden{
+  display: none;
+}
+
+.layer-0{
+  background-image: url(../img/hangmancrop-0.png);
+}
+
+.layer-1{
+  background-image: url(../img/hangmancrop-1.png);
+}
+
+.layer-2{
+  background-image: url(../img/hangmancrop-2.png);
+}
+
+.layer-3{
+  background-image: url(../img/hangmancrop-3.png);
+}
+
+.layer-4{
+  background-image: url(../img/hangmancrop-4.png);
+}
+
+.layer-5{
+  background-image: url(../img/hangmancrop-5.png);
+}
+
+.layer-6{
+  background-image: url(../img/hangmancrop-6.png);
 }
